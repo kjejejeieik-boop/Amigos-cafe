@@ -1,175 +1,182 @@
-/* ══════════════════════════════════════════════════════
-   AMIGOS CAFE — Premium Edition script.js
-   ══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   AMIGOS CAFE — script.js  |  Premium v3
+   All bugs fixed · Mobile-first · Cool animations
+═══════════════════════════════════════════════════ */
 
-/* ── 1. PAGE LOADER ── */
+/* ══ 1. PAGE LOADER ══ */
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('done');
-  }, 1500);
+  setTimeout(() => document.getElementById('loader').classList.add('out'), 1600);
 });
 
-/* ── 2. CUSTOM CURSOR ── */
-const dot  = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let ringX = 0, ringY = 0, dotX = 0, dotY = 0;
-let mouseX = 0, mouseY = 0;
+/* ══ 2. CUSTOM CURSOR (desktop only) ══ */
+const isTouch = window.matchMedia('(hover: none)').matches;
+if (!isTouch) {
+  const dot  = document.getElementById('cDot');
+  const ring = document.getElementById('cRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  dot.style.left  = mouseX + 'px';
-  dot.style.top   = mouseY + 'px';
-});
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
 
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  ring.style.left = ringX + 'px';
-  ring.style.top  = ringY + 'px';
-  requestAnimationFrame(animateRing);
+  (function trackRing() {
+    rx += (mx - rx) * 0.11;
+    ry += (my - ry) * 0.11;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(trackRing);
+  })();
+
+  document.querySelectorAll('a,button,.dish,.tab-btn,.gallery-item,.testi,.visit-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('hov'); ring.classList.add('hov'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('hov'); ring.classList.remove('hov'); });
+  });
 }
-animateRing();
 
-/* Cursor hover states */
-document.querySelectorAll('a, button, .dish-card, .menu-tab, .gallery-item').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    dot.classList.add('hovering');
-    ring.classList.add('hovering');
-  });
-  el.addEventListener('mouseleave', () => {
-    dot.classList.remove('hovering');
-    ring.classList.remove('hovering');
-  });
-});
-
-/* ── 3. NAV SCROLL EFFECT ── */
+/* ══ 3. NAV SCROLL ══ */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
+  nav.classList.toggle('scrolled', window.scrollY > 70);
 }, { passive: true });
 
-/* ── 4. LIVE STATUS ── */
+/* NAV "Find Us" CTA */
+document.querySelector('.nav-cta')?.addEventListener('click', () => {
+  document.getElementById('visit')?.scrollIntoView({ behavior: 'smooth' });
+});
+
+/* ══ 4. MOBILE HAMBURGER MENU ══ */
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('mobileDrawer');
+const drawerLinks = drawer.querySelectorAll('a');
+
+burger.addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+drawerLinks.forEach(a => {
+  a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ══ 5. LIVE STATUS ══ */
 (function () {
-  const dot2 = document.getElementById('liveDot');
-  const txt  = document.getElementById('statusTxt');
-  if (!dot2 || !txt) return;
-
-  const now  = new Date();
-  const mins = now.getHours() * 60 + now.getMinutes();
-  const OPEN  = 8 * 60;
-  const CLOSE = 23 * 60;
-
+  const dot = document.getElementById('liveDot');
+  const txt = document.getElementById('statusTxt');
+  if (!dot || !txt) return;
+  const mins = new Date().getHours() * 60 + new Date().getMinutes();
+  const OPEN = 8 * 60, CLOSE = 23 * 60;
   if (mins >= OPEN && mins < CLOSE) {
-    dot2.classList.remove('closed');
+    dot.classList.remove('closed');
     txt.innerHTML = '<strong style="color:#4caf50">Open Now</strong>';
   } else {
-    dot2.classList.add('closed');
-    const left = mins < OPEN ? OPEN - mins : (24 * 60 - mins) + OPEN;
+    dot.classList.add('closed');
+    const left = mins < OPEN ? OPEN - mins : (1440 - mins + OPEN);
     const h = Math.floor(left / 60), m = left % 60;
     txt.innerHTML = `<strong style="color:#ef5350">Closed</strong> · Opens in ${h > 0 ? h + 'h ' : ''}${m}m`;
   }
 })();
 
-/* ── 5. MENU TABS ── */
-function switchTab(id, btn) {
-  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.menu-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
-}
-window.switchTab = switchTab;
+/* ══ 6. MENU TABS ══ */
+window.switchTab = function(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+};
 
-/* ── 6. SCROLL REVEAL ── */
-const revealObserver = new IntersectionObserver((entries) => {
+/* ══ 7. SCROLL REVEAL ══ */
+const revObs = new IntersectionObserver(entries => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('in'), i * 70);
-      revealObserver.unobserve(entry.target);
+      setTimeout(() => entry.target.classList.add('in'), i * 65);
+      revObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.09, rootMargin: '0px 0px -35px 0px' });
 
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
-  revealObserver.observe(el);
-});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => revObs.observe(el));
 
-/* ── 7. COUNTER ANIMATION ── */
-function animateCounter(el) {
+/* ══ 8. COUNTER ANIMATION ══ */
+function runCounter(el) {
   const raw    = el.dataset.target;
+  const target = parseFloat(raw);
   const isFloat = raw.includes('.');
-  const target  = parseFloat(raw);
   const suffix  = el.dataset.suffix || '';
-  const duration = 1800;
-  const start = performance.now();
-
-  function tick(now) {
-    const elapsed  = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 4);
-    const value = target * eased;
-    el.textContent = (isFloat ? value.toFixed(1) : Math.floor(value)) + suffix;
-    if (progress < 1) requestAnimationFrame(tick);
-  }
+  const dur = 1800;
+  const t0 = performance.now();
+  const tick = now => {
+    const p = Math.min((now - t0) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 4); // ease-out-quart
+    el.textContent = (isFloat ? (target * e).toFixed(1) : Math.floor(target * e)) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  };
   requestAnimationFrame(tick);
 }
-
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateCounter(entry.target);
-      counterObserver.unobserve(entry.target);
-    }
-  });
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cntObs.unobserve(e.target); } });
 }, { threshold: 0.5 });
+document.querySelectorAll('.stat-n[data-target]').forEach(el => cntObs.observe(el));
 
-document.querySelectorAll('.stat-num[data-target]').forEach(el => {
-  counterObserver.observe(el);
+/* ══ 9. DISH CARD 3D TILT (desktop) ══ */
+if (!isTouch) {
+  document.querySelectorAll('.dish').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - .5) * 7;
+      const y = ((e.clientY - r.top)  / r.height - .5) * 7;
+      card.style.transition = 'transform .12s ease,border-color .3s,box-shadow .4s';
+      card.style.transform = `translateY(-6px) perspective(900px) rotateX(${-y}deg) rotateY(${x}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform .5s cubic-bezier(0.16,1,0.3,1),border-color .3s,box-shadow .4s';
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ══ 10. MAGNETIC BUTTONS (desktop) ══ */
+if (!isTouch) {
+  document.querySelectorAll('.btn-mag').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width  / 2) * 0.28;
+      const y = (e.clientY - r.top  - r.height / 2) * 0.28;
+      btn.style.transition = 'transform .12s ease';
+      btn.style.transform = `translate(${x}px,${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform .55s cubic-bezier(0.16,1,0.3,1)';
+      btn.style.transform = '';
+    });
+  });
+}
+
+/* ══ 11. HERO PARALLAX (desktop) ══ */
+if (!isTouch) {
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    document.querySelectorAll('.hero-float').forEach((el, i) => {
+      el.style.transform = `translateY(${sy * (i % 2 === 0 ? .07 : .04)}px)`;
+    });
+  }, { passive: true });
+}
+
+/* ══ 12. IMAGE ERROR FALLBACK ══ */
+document.querySelectorAll('img[data-fallback]').forEach(img => {
+  img.addEventListener('error', () => {
+    img.style.display = 'none'; // hide broken img, parent CSS gradient shows
+  });
 });
-
-/* ── 8. MAGNETIC BUTTONS ── */
-document.querySelectorAll('.btn-magnetic').forEach(btn => {
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width  / 2) * 0.28;
-    const y = (e.clientY - rect.top  - rect.height / 2) * 0.28;
-    btn.style.transform = `translate(${x}px, ${y}px)`;
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = 'translate(0,0)';
-    btn.style.transition = 'transform .6s cubic-bezier(0.16,1,0.3,1)';
-  });
-  btn.addEventListener('mouseenter', () => {
-    btn.style.transition = 'transform .15s ease';
-  });
-});
-
-/* ── 9. NAV "FIND US" CTA ── */
-document.querySelector('.nav-cta')?.addEventListener('click', () => {
-  document.getElementById('visit')?.scrollIntoView({ behavior: 'smooth' });
-});
-
-/* ── 10. PARALLAX HERO FLOATS (subtle) ── */
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  document.querySelectorAll('.hero-float').forEach((el, i) => {
-    const speed = (i % 2 === 0) ? 0.08 : 0.05;
-    el.style.transform = `translateY(${scrollY * speed}px)`;
-  });
-}, { passive: true });
-
-/* ── 11. DISH CARD — subtle tilt on hover ── */
-document.querySelectorAll('.dish-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 6;
-    const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 6;
-    card.style.transform = `translateY(-6px) perspective(800px) rotateX(${-y}deg) rotateY(${x}deg)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.transition = 'transform .5s cubic-bezier(0.16,1,0.3,1), border-color .3s, box-shadow .4s';
-  });
-  card.addEventListener('mouseenter', () => {
-    card.style.transition = 'transform .15s ease, border-color .3s, box-shadow .4s';
+// Also handle all images generically
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('error', function() {
+    this.style.opacity = '0';
   });
 });
