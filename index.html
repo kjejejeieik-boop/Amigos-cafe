@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amigos Cafe — Thane's Hidden Gem</title>
-  <meta name="description" content="Amigos Cafe in Thane West — legendary hot chocolate, artisan pastas & cozy mezzanine vibes. Italian & Mexican soul food behind Hiranandani Meadows." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Abril+Fatface&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Amigos Cafe — Thane's Hidden Gem | Italian & Mexican Soul Food</title>
+  <meta name="description" content="Amigos Cafe, Thane West — legendary hot chocolate, artisan pastas, cozy mezzanine seating. Best Italian & Mexican cafe behind Hiranandani Meadows."/>
+  <meta name="theme-color" content="#080401"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Abril+Fatface&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- ══ CUSTOM CURSOR ══ -->
-<div class="cursor-dot"  id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- ══ CURSOR (hidden on touch) ══ -->
+<div class="cursor-dot"  id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
 
-<!-- ══ PAGE LOADER ══ -->
-<div class="loader" id="loader">
-  <div class="loader-logo">Amigos <span>Cafe</span></div>
-  <div class="loader-track"><div class="loader-fill"></div></div>
+<!-- ══ LOADER ══ -->
+<div id="loader">
+  <div class="loader-name">Amigos <span>Cafe</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- ══ MOBILE DRAWER ══ -->
+<div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-label="Mobile menu">
+  <a href="#about">About</a>
+  <a href="#menu">Menu</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#visit">Visit</a>
+  <a class="drawer-wa"
+     href="https://wa.me/919820073673?text=Hi%20Amigos%20Cafe!%20I%27d%20like%20to%20book%20a%20table."
+     target="_blank" rel="noopener">
+    <!-- WhatsApp SVG -->
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    WhatsApp Us
+  </a>
 </div>
 
 <!-- ══ NAV ══ -->
@@ -32,62 +52,61 @@
     <li><a href="#visit">Visit</a></li>
   </ul>
   <button class="nav-cta">Find Us</button>
+  <button class="hamburger" id="burger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- ══ LIVE STATUS BAR ══ -->
+<!-- ══ LIVE BAR ══ -->
 <div class="live-bar">
   <span class="live-dot" id="liveDot"></span>
   <span id="statusTxt">Checking…</span>
-  <span class="live-divider">·</span>
-  Open Daily <strong>&thinsp;8:00 AM – 11:00 PM</strong>
-  <span class="live-divider">·</span>
-  <em style="opacity:.55; font-size:.7rem;">Some evenings till 1 AM — call +91 98200 73673</em>
+  <span class="live-sep">·</span>
+  Open Daily <strong style="margin:0 3px">8 AM – 11 PM</strong>
+  <span class="live-sep">·</span>
+  <span style="opacity:.55;font-size:.7rem">Some evenings till 1 AM · Call +91 98200 73673</span>
 </div>
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
 
-  <!-- Floating food orbs -->
-  <div class="hero-float">
-    <img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?auto=format&fit=crop&w=400&q=80"
-         alt="Hot Chocolate" loading="eager" />
+  <!-- Floating food orbs — gradient fallback if image fails -->
+  <div class="hero-float hf1">
+    <img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400&q=80&auto=format&fit=crop" alt="Hot Chocolate" loading="eager" onerror="this.style.opacity='0'"/>
   </div>
-  <div class="hero-float">
-    <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=300&q=80"
-         alt="Bruschetta" loading="eager" />
+  <div class="hero-float hf2">
+    <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=300&q=80&auto=format&fit=crop" alt="Bruschetta" loading="eager" onerror="this.style.opacity='0'"/>
   </div>
-  <div class="hero-float">
-    <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=400&q=80"
-         alt="Pasta" loading="eager" />
+  <div class="hero-float hf3">
+    <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=80&auto=format&fit=crop" alt="Pasta" loading="eager" onerror="this.style.opacity='0'"/>
   </div>
-  <div class="hero-float">
-    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=300&q=80"
-         alt="Pizza" loading="eager" />
+  <div class="hero-float hf4">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&q=80&auto=format&fit=crop" alt="Pizza" loading="eager" onerror="this.style.opacity='0'"/>
   </div>
-  <div class="hero-float">
-    <img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?auto=format&fit=crop&w=250&q=80"
-         alt="Shake" loading="eager" />
+  <div class="hero-float hf5">
+    <img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?w=260&q=80&auto=format&fit=crop" alt="Shake" loading="eager" onerror="this.style.opacity='0'"/>
   </div>
 
   <div class="hero-content">
     <div class="hero-badge">
-      <span class="hero-stars">★★★★★</span>
+      <span class="badge-stars">★★★★★</span>
       Google Top-Rated Cafe · Thane
     </div>
-    <p class="hero-eyebrow">Sunrise Shopping Center · Thane West</p>
+    <p class="hero-eye">Sunrise Shopping Center · Thane West</p>
     <h1 class="hero-title">
-      Thane's Hidden Gem<br />for <em>Italian &amp; Mexican</em><br />Soul Food
+      Thane's Hidden Gem<br/>for <em>Italian &amp; Mexican</em><br/>Soul Food
     </h1>
     <p class="hero-sub">
       Nestled behind Hiranandani Meadows — legendary hot chocolate, artisan pastas, and a mezzanine that feels like your own private corner of the world.
     </p>
-    <div class="hero-actions">
-      <a class="btn btn-gold btn-magnetic"
-         href="https://www.swiggy.com" target="_blank" rel="noopener">
+    <div class="hero-btns">
+      <a class="btn btn-gold btn-mag"
+         href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order"
+         target="_blank" rel="noopener">
         🛵&ensp;Order on Swiggy / Zomato
       </a>
-      <a class="btn btn-outline btn-magnetic"
+      <a class="btn btn-out btn-mag"
          href="https://maps.google.com/?q=Cafe+Amigos+Sunrise+Shopping+Complex+Thane+West"
          target="_blank" rel="noopener">
         📍&ensp;Get Directions
@@ -96,85 +115,68 @@
   </div>
 
   <div class="hero-scroll">
-    <span class="scroll-label">Scroll</span>
+    <span class="scroll-lbl">Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
 <!-- ══ MARQUEE ══ -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <!-- repeated twice for seamless loop -->
-    <span class="marquee-item">Amigos Cafe<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Best Pasta in Thane<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Legendary Hot Chocolate<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Cozy Mezzanine Seating<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Italian &amp; Mexican Soul Food<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Thane West · Since Forever<span class="marquee-dot"></span></span>
-    <span class="marquee-item">5.0 ★ Google Rated<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Pet Friendly · Free Wi-Fi<span class="marquee-dot"></span></span>
-    <!-- duplicate -->
-    <span class="marquee-item">Amigos Cafe<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Best Pasta in Thane<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Legendary Hot Chocolate<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Cozy Mezzanine Seating<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Italian &amp; Mexican Soul Food<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Thane West · Since Forever<span class="marquee-dot"></span></span>
-    <span class="marquee-item">5.0 ★ Google Rated<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Pet Friendly · Free Wi-Fi<span class="marquee-dot"></span></span>
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="m-item">Amigos Cafe<span class="m-dot"></span></span>
+    <span class="m-item">Best Pasta in Thane<span class="m-dot"></span></span>
+    <span class="m-item">Legendary Hot Chocolate<span class="m-dot"></span></span>
+    <span class="m-item">Cozy Mezzanine Seating<span class="m-dot"></span></span>
+    <span class="m-item">Italian &amp; Mexican Soul Food<span class="m-dot"></span></span>
+    <span class="m-item">5.0 ★ Google Rated<span class="m-dot"></span></span>
+    <span class="m-item">Pet Friendly · Free Wi-Fi<span class="m-dot"></span></span>
+    <span class="m-item">Thane West, Maharashtra<span class="m-dot"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="m-item">Amigos Cafe<span class="m-dot"></span></span>
+    <span class="m-item">Best Pasta in Thane<span class="m-dot"></span></span>
+    <span class="m-item">Legendary Hot Chocolate<span class="m-dot"></span></span>
+    <span class="m-item">Cozy Mezzanine Seating<span class="m-dot"></span></span>
+    <span class="m-item">Italian &amp; Mexican Soul Food<span class="m-dot"></span></span>
+    <span class="m-item">5.0 ★ Google Rated<span class="m-dot"></span></span>
+    <span class="m-item">Pet Friendly · Free Wi-Fi<span class="m-dot"></span></span>
+    <span class="m-item">Thane West, Maharashtra<span class="m-dot"></span></span>
   </div>
 </div>
 
 <!-- ══ ABOUT ══ -->
-<section class="about section-wrap" id="about">
-  <div class="section-inner">
+<section class="about sec" id="about">
+  <div class="wrap">
     <div class="about-grid">
 
-      <div class="reveal-left">
-        <p class="section-label">Our Story</p>
-        <h2 class="section-title">A cozy escape<br />from the <em>city bustle</em></h2>
-        <p style="margin-top:20px;">
-          Nestled behind Hiranandani Meadows, Amigos Cafe is more than a restaurant — it's a two-level sanctuary where time slows down. Whether you're settling in for a quiet work session, a candlelit date, or a lively catch-up with friends, there's a corner here with your name on it.
-        </p>
-        <p>
-          We're known for our <strong style="color:var(--cream)">legendary hot chocolate</strong>, handcrafted pastas, and a menu that fuses Italian classics with Mexican boldness. Every dish is made with obsessive care and a whole lot of heart.
-        </p>
-        <div class="about-stats">
-          <div class="stat-cell">
-            <span class="stat-num" data-target="5.0">5.0</span>
-            <span class="stat-lbl">Google Rating</span>
-          </div>
-          <div class="stat-cell">
-            <span class="stat-num" data-target="2" data-suffix="-Level">2-Level</span>
-            <span class="stat-lbl">Seating</span>
-          </div>
-          <div class="stat-cell">
-            <span class="stat-num" data-target="650" data-suffix="₹">₹650</span>
-            <span class="stat-lbl">For Two</span>
-          </div>
+      <div class="rv-l">
+        <p class="sec-label">Our Story</p>
+        <h2 class="sec-title">A cozy escape from<br/>the <em>city bustle</em></h2>
+        <div class="about-body" style="margin-top:20px">
+          <p>Nestled behind Hiranandani Meadows, Amigos Cafe is more than a restaurant — it's a two-level sanctuary where time slows down. Whether you're settling in for a quiet work session, a candlelit date, or a lively catch-up with friends, there's a corner here with your name on it.</p>
+          <p>We're known for our <strong style="color:var(--cream)">legendary hot chocolate</strong>, handcrafted pastas, and a menu that fuses Italian classics with Mexican boldness. Every dish is made with obsessive care and a whole lot of heart.</p>
         </div>
-        <div class="about-chips">
-          <div class="chip"><span class="chip-icon">📶</span> Free Wi-Fi</div>
-          <div class="chip"><span class="chip-icon">🪑</span> Mezzanine Seating</div>
-          <div class="chip"><span class="chip-icon">🐾</span> Pet Friendly</div>
-          <div class="chip"><span class="chip-icon">🚫</span> No Alcohol</div>
+        <div class="stats-row">
+          <div class="stat-box"><span class="stat-n" data-target="5.0">5.0</span><span class="stat-l">Google Rating</span></div>
+          <div class="stat-box"><span class="stat-n" data-target="2" data-suffix="+">2+</span><span class="stat-l">Levels of Seating</span></div>
+          <div class="stat-box"><span class="stat-n" data-target="650" data-suffix="₹">₹650</span><span class="stat-l">For Two</span></div>
+        </div>
+        <div class="chips">
+          <div class="chip">📶 Free Wi-Fi</div>
+          <div class="chip">🪑 Mezzanine Seating</div>
+          <div class="chip">🐾 Pet Friendly</div>
+          <div class="chip">🚫 No Alcohol</div>
         </div>
       </div>
 
-      <div class="reveal-right">
-        <div class="atmo-visual">
-          <div class="atmo-card">
-            <div class="atmo-image-wrap">
-              <img src="https://images.unsplash.com/photo-1445116572257-6ba0b920b4a1?auto=format&fit=crop&w=800&q=80"
-                   alt="Amigos Cafe interior" loading="lazy" />
-              <div class="atmo-image-overlay"></div>
-            </div>
-            <div class="atmo-body">
-              <div class="mezz-tag">✨ Upper Deck</div>
-              <p class="atmo-quote">
-                "Find your corner in our <span>mezzanine seating</span> — Thane's most intimate upper deck."
-              </p>
-            </div>
+      <div class="rv-r">
+        <div class="atmo-card">
+          <div class="atmo-img">
+            <img src="https://images.unsplash.com/photo-1445116572257-6ba0b920b4a1?w=800&q=80&auto=format&fit=crop"
+                 alt="Amigos Cafe cozy interior" loading="lazy" onerror="this.style.opacity='0'"/>
+          </div>
+          <div class="atmo-body">
+            <div class="mezz-tag">✨ Upper Deck · Mezzanine</div>
+            <p class="atmo-q">"Find your corner in our <span>mezzanine seating</span> — Thane's most intimate upper deck."</p>
           </div>
         </div>
       </div>
@@ -184,122 +186,115 @@
 </section>
 
 <!-- ══ MENU ══ -->
-<section class="menu section-wrap" id="menu">
-  <div class="section-inner">
+<section class="menu-sec sec" id="menu">
+  <div class="wrap">
     <div class="menu-header">
-      <div class="reveal">
-        <p class="section-label">Our Menu</p>
-        <h2 class="section-title">Crafted with <em>soul</em>,<br />served with warmth</h2>
+      <div class="rv">
+        <p class="sec-label">Our Menu</p>
+        <h2 class="sec-title">Crafted with <em>soul</em>,<br/>served with warmth</h2>
       </div>
-      <div class="menu-tabs reveal">
-        <button class="menu-tab active" onclick="switchTab('starters',this)">🥙 Starters</button>
-        <button class="menu-tab" onclick="switchTab('mains',this)">🍝 Mains</button>
-        <button class="menu-tab" onclick="switchTab('beverages',this)">☕ Sips</button>
+      <div class="rv d2">
+        <p class="swipe-hint">👆 Tap to explore sections</p>
+        <div class="tabs">
+          <button class="tab-btn on" onclick="switchTab('starters',this)">🥙 Starters</button>
+          <button class="tab-btn" onclick="switchTab('mains',this)">🍝 Mains</button>
+          <button class="tab-btn" onclick="switchTab('beverages',this)">☕ Sips</button>
+        </div>
       </div>
     </div>
 
-    <!-- ── STARTERS ── -->
-    <div class="menu-panel active" id="tab-starters">
-      <div class="menu-grid">
+    <!-- STARTERS -->
+    <div class="tab-panel on" id="tab-starters">
+      <div class="dish-grid">
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?auto=format&fit=crop&w=600&q=80"
-                 alt="Loaded Nachos" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
-              <span class="dish-highlight-badge">⭐ Must Try</span>
+        <div class="dish rv d1">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?w=600&q=80&auto=format&fit=crop" alt="Loaded Nachos" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
+              <div class="veg-flag v"><div class="dot"></div></div>
+              <span class="dish-badge">⭐ Must Try</span>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Chef's Special</div>
             <div class="dish-name">Loaded Nachos</div>
             <div class="dish-desc">Baked with salsa, melted cheese &amp; jalapeños — the table's first instinct, every time.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹349</div>
-              <button class="add-btn" title="Add to order">+</button>
+            <div class="dish-foot">
+              <span class="dish-price">₹349</span>
+              <button class="add-btn" aria-label="Add Loaded Nachos">+</button>
             </div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80"
-                 alt="Veg Mezze Platter" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
+        <div class="dish rv d2">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80&auto=format&fit=crop" alt="Veg Mezze Platter" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
+              <div class="veg-flag v"><div class="dot"></div></div>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Middle Eastern</div>
             <div class="dish-name">Veg Mezze Platter</div>
-            <div class="dish-desc">Hummus, warm pita &amp; a spread of Middle Eastern sides — a full journey on one plate.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹350</div>
-              <button class="add-btn" title="Add to order">+</button>
+            <div class="dish-desc">Hummus, warm pita &amp; Middle Eastern sides — a full journey on one plate.</div>
+            <div class="dish-foot">
+              <span class="dish-price">₹350</span>
+              <button class="add-btn" aria-label="Add Veg Mezze Platter">+</button>
             </div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1529474944862-30a7b5ec2fde?auto=format&fit=crop&w=600&q=80"
-                 alt="Chicken Mezze Platter" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge nveg"><div class="dot"></div></div>
+        <div class="dish rv d3">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1529474944862-30a7b5ec2fde?w=600&q=80&auto=format&fit=crop" alt="Chicken Mezze Platter" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
+              <div class="veg-flag nv"><div class="dot"></div></div>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Middle Eastern</div>
             <div class="dish-name">Chicken Mezze Platter</div>
-            <div class="dish-desc">The same beloved spread, elevated with succulent chicken. A generous, shareable feast.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹390</div>
-              <button class="add-btn" title="Add to order">+</button>
+            <div class="dish-desc">The same beloved spread elevated with succulent chicken. A generous, shareable feast.</div>
+            <div class="dish-foot">
+              <span class="dish-price">₹390</span>
+              <button class="add-btn" aria-label="Add Chicken Mezze Platter">+</button>
             </div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1573080496219-bb964701c2c6?auto=format&fit=crop&w=600&q=80"
-                 alt="Peri Peri Potato Wedges" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
+        <div class="dish rv d4">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1573080496219-bb964701c2c6?w=600&q=80&auto=format&fit=crop" alt="Peri Peri Potato Wedges" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
+              <div class="veg-flag v"><div class="dot"></div></div>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Snack</div>
             <div class="dish-name">Peri Peri Potato Wedges</div>
             <div class="dish-desc">Crispy golden wedges with tangy peri peri seasoning. Dangerously addictive.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹280</div>
-              <button class="add-btn" title="Add to order">+</button>
+            <div class="dish-foot">
+              <span class="dish-price">₹280</span>
+              <button class="add-btn" aria-label="Add Peri Peri Wedges">+</button>
             </div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=600&q=80"
-                 alt="Mushroom Bruschetta" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
-              <span class="dish-highlight-badge">Fan Fave</span>
+        <div class="dish rv d5">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=600&q=80&auto=format&fit=crop" alt="Mushroom Bruschetta" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
+              <div class="veg-flag v"><div class="dot"></div></div>
+              <span class="dish-badge">Fan Fave</span>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Local Favourite</div>
             <div class="dish-name">Mushroom Bruschetta</div>
             <div class="dish-desc">Toasted, topped, beloved. A Thane classic that keeps tables coming back for more.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹320</div>
-              <button class="add-btn" title="Add to order">+</button>
+            <div class="dish-foot">
+              <span class="dish-price">₹320</span>
+              <button class="add-btn" aria-label="Add Mushroom Bruschetta">+</button>
             </div>
           </div>
         </div>
@@ -307,217 +302,153 @@
       </div>
     </div>
 
-    <!-- ── MAINS ── -->
-    <div class="menu-panel" id="tab-mains">
-      <div class="menu-grid">
+    <!-- MAINS -->
+    <div class="tab-panel" id="tab-mains">
+      <div class="dish-grid">
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80"
-                 alt="Alfredo Pasta Veg" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
-            </div>
+        <div class="dish rv d1">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80&auto=format&fit=crop" alt="Alfredo Pasta Veg" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Italian Classic</div>
             <div class="dish-name">Alfredo Pasta (Veg)</div>
-            <div class="dish-desc">Rich, velvety cream sauce draped over perfectly cooked pasta. Pure comfort.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹430</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">Rich, velvety cream sauce draped over perfectly cooked pasta. Pure comfort in a bowl.</div>
+            <div class="dish-foot"><span class="dish-price">₹430</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80"
-                 alt="Alfredo Chicken Pasta" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge nveg"><div class="dot"></div></div>
-            </div>
+        <div class="dish rv d2">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600&q=80&auto=format&fit=crop" alt="Alfredo Pasta Chicken" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Italian Classic</div>
             <div class="dish-name">Alfredo Pasta (Chicken)</div>
             <div class="dish-desc">Creamy Alfredo loaded with tender chicken strips — indulgent and deeply satisfying.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹490</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-foot"><span class="dish-price">₹490</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&w=600&q=80"
-                 alt="Arrabbiata Pasta" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
-            </div>
+        <div class="dish rv d3">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1598866594230-a7c12756260f?w=600&q=80&auto=format&fit=crop" alt="Arrabbiata Pasta" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Spicy Italian</div>
             <div class="dish-name">Arrabbiata Pasta (Veg)</div>
             <div class="dish-desc">Fiery tomato, garlic, and herbs — a bold pasta that doesn't apologise.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹430</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-foot"><span class="dish-price">₹430</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80"
-                 alt="BBQ Chicken Pizza" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge nveg"><div class="dot"></div></div>
-            </div>
+        <div class="dish rv d4">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="BBQ Chicken Pizza" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Wood-Fired</div>
             <div class="dish-name">Barbecue Chicken Pizza</div>
-            <div class="dish-desc">8-inch thin crust with smoky BBQ sauce and juicy chicken. A Amigos staple.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹390</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">8-inch thin crust, smoky BBQ sauce and juicy chicken. A reliable, delicious classic.</div>
+            <div class="dish-foot"><span class="dish-price">₹390</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=600&q=80"
-                 alt="Mexican Pot Rice" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge veg"><div class="dot"></div></div>
-            </div>
+        <div class="dish rv d5">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&q=80&auto=format&fit=crop" alt="Mexican Pot Rice" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Mexican</div>
             <div class="dish-name">Mexican Pot Rice</div>
-            <div class="dish-desc">Fragrant rice with beans, salsa, and south-of-the-border spices. Soul food, literally.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹390</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">Fragrant rice with beans, salsa, and south-of-the-border spices. Soul food.</div>
+            <div class="dish-foot"><span class="dish-price">₹390</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=600&q=80"
-                 alt="Chicken Chilaquiles Lasagna" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div class="veg-badge nveg"><div class="dot"></div></div>
-              <span class="dish-highlight-badge">⭐ Chef's Pick</span>
+        <div class="dish rv d6">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=600&q=80&auto=format&fit=crop" alt="Chicken Chilaquiles Lasagna" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
+              <div class="veg-flag nv"><div class="dot"></div></div>
+              <span class="dish-badge">⭐ Chef's Pick</span>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Fusion Masterpiece</div>
             <div class="dish-name">Chicken Chilaquiles Lasagna</div>
-            <div class="dish-desc">Italy meets Mexico — crispy tortillas, tangy salsa, layers of chicken &amp; molten cheese.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹520</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">Italy meets Mexico — tortillas, tangy salsa, layers of chicken &amp; molten cheese.</div>
+            <div class="dish-foot"><span class="dish-price">₹520</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- ── BEVERAGES ── -->
-    <div class="menu-panel" id="tab-beverages">
-      <div class="menu-grid">
+    <!-- BEVERAGES -->
+    <div class="tab-panel" id="tab-beverages">
+      <div class="dish-grid">
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?auto=format&fit=crop&w=600&q=80"
-                 alt="Legendary Hot Chocolate" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
+        <div class="dish rv d1">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=600&q=80&auto=format&fit=crop" alt="Legendary Hot Chocolate" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
               <div></div>
-              <span class="dish-highlight-badge">⭐ Iconic</span>
+              <span class="dish-badge">⭐ Iconic</span>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">The Legend</div>
             <div class="dish-name">The Legendary Hot Chocolate</div>
-            <div class="dish-desc">"A hug in a mug." Rich, velvety, deeply chocolatey — the one drink Amigos is celebrated for.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹250</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">"A hug in a mug." Rich, velvety, deeply chocolatey — the drink Amigos is celebrated for.</div>
+            <div class="dish-foot"><span class="dish-price">₹250</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?auto=format&fit=crop&w=600&q=80"
-                 alt="Mud Pie Shake" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
+        <div class="dish rv d2">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?w=600&q=80&auto=format&fit=crop" alt="Mud Pie Shake" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top">
               <div></div>
-              <span class="dish-highlight-badge">Fan Fave</span>
+              <span class="dish-badge">Fan Fave</span>
             </div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Signature Shake</div>
             <div class="dish-name">Mud Pie Shake</div>
-            <div class="dish-desc">A sinful chocolate and coffee fusion that blurs the line between dessert and drink.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹249</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">A sinful chocolate and coffee blend that blurs the line between dessert and drink.</div>
+            <div class="dish-foot"><span class="dish-price">₹249</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?auto=format&fit=crop&w=600&q=80"
-                 alt="Banoofee Shake" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div></div>
-            </div>
+        <div class="dish rv d3">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&q=80&auto=format&fit=crop" alt="Banoofee Shake" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Shake</div>
             <div class="dish-name">Banoofee Shake</div>
-            <div class="dish-desc">Banana, coffee, and caramel in a glass — tropical comfort with a serious caffeine kick.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹229</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">Banana, coffee, and caramel in a glass — tropical comfort with a caffeine kick.</div>
+            <div class="dish-foot"><span class="dish-price">₹229</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
-        <div class="dish-card">
-          <div class="dish-img">
-            <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=600&q=80"
-                 alt="Kachchi Kairi Delight" loading="lazy" />
-            <div class="dish-img-overlay"></div>
-            <div class="dish-img-top">
-              <div></div>
-            </div>
+        <div class="dish rv d4">
+          <div class="dish-img-wrap">
+            <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?w=600&q=80&auto=format&fit=crop" alt="Kachchi Kairi Delight" loading="lazy" onerror="this.style.opacity='0'"/>
+            <div class="dish-top"><div></div></div>
           </div>
           <div class="dish-body">
             <div class="dish-tag">Local Twist</div>
             <div class="dish-name">Kachchi Kairi Delight</div>
-            <div class="dish-desc">A refreshing raw mango cooler that brings the bold flavours of Maharashtra to your table.</div>
-            <div class="dish-footer">
-              <div class="dish-price">₹230</div>
-              <button class="add-btn" title="Add to order">+</button>
-            </div>
+            <div class="dish-desc">A refreshing raw mango cooler bringing bold Maharashtra flavours to your table.</div>
+            <div class="dish-foot"><span class="dish-price">₹230</span><button class="add-btn">+</button></div>
           </div>
         </div>
 
@@ -526,181 +457,121 @@
   </div>
 </section>
 
-<!-- ══ FOOD GALLERY STRIP ══ -->
-<div class="gallery-strip" aria-label="Food gallery">
+<!-- ══ GALLERY STRIP ══ -->
+<div class="gallery" aria-label="Food gallery" aria-hidden="true">
   <div class="gallery-track">
-    <!-- First set -->
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Hot Chocolate</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">BBQ Pizza</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Alfredo Pasta</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Mud Pie Shake</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Loaded Nachos</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Lasagna</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Mushroom Bruschetta</div>
-    </div>
-    <!-- Duplicate for loop -->
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Hot Chocolate</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">BBQ Pizza</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Alfredo Pasta</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Mud Pie Shake</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Loaded Nachos</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Lasagna</div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=500&q=75" alt="" loading="lazy" />
-      <div class="gallery-caption">Mushroom Bruschetta</div>
-    </div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Hot Chocolate</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">BBQ Pizza</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Alfredo Pasta</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Mud Pie Shake</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Loaded Nachos</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Mushroom Bruschetta</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1445116572257-6ba0b920b4a1?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">The Amigos Vibe</div></div>
+    <!-- duplicate for loop -->
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Hot Chocolate</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">BBQ Pizza</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Alfredo Pasta</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1572490122747-3e9f29e149db?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Mud Pie Shake</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582169296194-e4d644c48063?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Loaded Nachos</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">Mushroom Bruschetta</div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1445116572257-6ba0b920b4a1?w=500&q=75&auto=format&fit=crop" alt="" loading="lazy" onerror="this.style.opacity='0'"/><div class="gallery-caption">The Amigos Vibe</div></div>
   </div>
 </div>
 
-<!-- ══ TESTIMONIALS ══ -->
-<section class="testimonials section-wrap" id="reviews">
-  <div class="section-inner">
-    <div class="reveal">
-      <p class="section-label">What People Say</p>
-      <h2 class="section-title">Thane's best-kept secret,<br /><em>not so secret anymore</em></h2>
+<!-- ══ REVIEWS ══ -->
+<section class="reviews sec" id="reviews">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">What People Say</p>
+      <h2 class="sec-title">Thane's best-kept secret,<br/><em>not so secret anymore</em></h2>
     </div>
     <div class="testi-grid">
-
-      <div class="testi-card reveal">
-        <div class="testi-bigquote">"</div>
+      <div class="testi rv d1">
+        <div class="testi-bq">"</div>
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">Honestly the best pasta in Thane. The Alfredo is so creamy it should be illegal. And those cozy vibes — dim lights, wooden tables, soft music — I come here to actually unwind.</p>
-        <div class="testi-author">Priya M.</div>
-        <div class="testi-platform">📍 Google Review · Thane West</div>
+        <div class="testi-name">Priya M.</div>
+        <div class="testi-src">📍 Google Review · Thane West</div>
       </div>
-
-      <div class="testi-card reveal">
-        <div class="testi-bigquote">"</div>
+      <div class="testi rv d2">
+        <div class="testi-bq">"</div>
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">You HAVE to try the Mudpie Shake. I'm not exaggerating when I say it changed my life a little. Also, sitting upstairs feels like your own private cafe. Absolutely must-visit.</p>
-        <div class="testi-author">Rohan K.</div>
-        <div class="testi-platform">📍 Zomato Review · Manpada</div>
+        <div class="testi-name">Rohan K.</div>
+        <div class="testi-src">📍 Zomato Review · Manpada</div>
       </div>
-
-      <div class="testi-card reveal">
-        <div class="testi-bigquote">"</div>
+      <div class="testi rv d3">
+        <div class="testi-bq">"</div>
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">Cozy vibes that hit different. Brought my dog and they were so welcoming. The hot chocolate is genuinely a hug in a mug — came on a rainy Tuesday and left completely reset.</p>
-        <div class="testi-author">Anika S.</div>
-        <div class="testi-platform">📍 Google Review · Hiranandani Meadows</div>
+        <div class="testi-name">Anika S.</div>
+        <div class="testi-src">📍 Google Review · Hiranandani Meadows</div>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- ══ VISIT ══ -->
-<section class="visit section-wrap" id="visit">
-  <div class="section-inner">
-    <div class="reveal">
-      <p class="section-label">Plan Your Visit</p>
-      <h2 class="section-title">Everything you need<br />to <em>find us</em></h2>
+<section class="visit sec" id="visit">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">Plan Your Visit</p>
+      <h2 class="sec-title">Everything you need<br/>to <em>find us</em></h2>
     </div>
     <div class="visit-grid">
-      <div class="visit-card reveal">
+      <div class="visit-card rv d1">
         <div class="visit-icon">📍</div>
         <div class="visit-title">Address</div>
-        <div class="visit-body">
-          Shop No. 12, Sunrise Shopping Center,<br />Next to Hyde Park,<br />Thane West, MH 400610
-        </div>
+        <div class="visit-body">Shop No. 12, Sunrise Shopping Center,<br/>Next to Hyde Park,<br/>Thane West, MH 400610</div>
       </div>
-      <div class="visit-card reveal">
+      <div class="visit-card rv d2">
         <div class="visit-icon">🕐</div>
         <div class="visit-title">Hours</div>
-        <div class="visit-body">
-          Open Daily<br /><strong style="color:var(--cream)">8:00 AM – 11:00 PM</strong><br />
-          <span style="color:var(--gold);font-size:.75rem">Some evenings till 1 AM<br />Call to confirm</span>
-        </div>
+        <div class="visit-body">Open Daily<br/><strong style="color:var(--cream)">8:00 AM – 11:00 PM</strong><br/><span style="color:var(--gold);font-size:.75rem">Some evenings till 1 AM<br/>Call to confirm</span></div>
       </div>
-      <div class="visit-card reveal">
+      <div class="visit-card rv d3">
         <div class="visit-icon">💰</div>
         <div class="visit-title">Cost for Two</div>
-        <div class="visit-body">
-          Approx. <strong style="color:var(--cream)">₹650 – ₹1000</strong><br />for two people<br />
-          <span style="color:var(--sage);font-size:.75rem">Exceptional value</span>
-        </div>
+        <div class="visit-body">Approx. <strong style="color:var(--cream)">₹650 – ₹1000</strong><br/>for two people<br/><span style="color:var(--sage);font-size:.75rem">Exceptional value</span></div>
       </div>
-      <div class="visit-card reveal">
+      <div class="visit-card rv d4">
         <div class="visit-icon">✨</div>
         <div class="visit-title">Amenities</div>
-        <div class="visit-body">
-          Free Wi-Fi · Upper Deck Seating<br />Pet Friendly · No Alcohol<br />Warm Indoor Atmosphere
-        </div>
+        <div class="visit-body">Free Wi-Fi · Upper Deck<br/>Pet Friendly · No Alcohol<br/>Warm Indoor Atmosphere</div>
       </div>
     </div>
-    <div class="visit-actions reveal">
-      <a class="btn btn-gold btn-magnetic"
+    <div class="visit-actions rv">
+      <a class="btn btn-gold btn-mag"
          href="https://maps.google.com/?q=Cafe+Amigos+Sunrise+Shopping+Complex+Thane+West"
-         target="_blank" rel="noopener">
-        📍&ensp;Get Directions
-      </a>
-      <a class="btn btn-outline btn-magnetic"
+         target="_blank" rel="noopener">📍&ensp;Get Directions</a>
+      <a class="btn btn-out btn-mag"
          href="https://wa.me/919820073673?text=Hi%20Amigos%20Cafe!%20I%27d%20like%20to%20book%20a%20table."
          target="_blank" rel="noopener">
-        💬&ensp;WhatsApp +91 98200 73673
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp +91 98200 73673
       </a>
-      <a class="btn btn-outline btn-magnetic"
+      <a class="btn btn-out btn-mag"
          href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order"
-         target="_blank" rel="noopener">
-        🍽&ensp;Order on Zomato
-      </a>
+         target="_blank" rel="noopener">🍽&ensp;Order on Zomato</a>
     </div>
   </div>
 </section>
 
 <!-- ══ FOOTER ══ -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
+  <div class="foot-inner">
+    <div class="foot-top">
       <div>
-        <div class="footer-logo">Amigos <span>Cafe</span></div>
-        <p class="footer-desc">Thane's hidden gem for Italian &amp; Mexican soul food.<br />Cozy corners, legendary sips, honest food made with heart.</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <div class="foot-logo">Amigos <span>Cafe</span></div>
+        <p class="foot-desc">Thane's hidden gem for Italian &amp; Mexican soul food.<br/>Cozy corners, legendary sips, honest food made with heart.</p>
+        <div class="foot-btns">
           <a class="btn btn-gold btn-sm" href="https://www.swiggy.com" target="_blank" rel="noopener">🛵 Swiggy</a>
-          <a class="btn btn-outline btn-sm" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west" target="_blank" rel="noopener" style="border-color:var(--border-lit);color:var(--gold);">🍽 Zomato</a>
+          <a class="btn btn-out btn-sm" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west" target="_blank" rel="noopener" style="border-color:var(--border-lit);color:var(--gold)">🍽 Zomato</a>
         </div>
       </div>
       <div>
-        <p class="footer-links-title">Navigate</p>
-        <ul class="footer-links">
+        <p class="foot-col-title">Navigate</p>
+        <ul class="foot-links">
           <li><a href="#about">About Us</a></li>
           <li><a href="#menu">Menu</a></li>
           <li><a href="#reviews">Reviews</a></li>
@@ -708,33 +579,35 @@
         </ul>
       </div>
       <div>
-        <p class="footer-links-title">Contact</p>
-        <div class="footer-address">
-          <strong>Amigos Cafe</strong><br />
-          Shop No. 12, Sunrise Shopping Center<br />
-          Next to Hyde Park, Thane West<br />
-          Maharashtra 400610<br /><br />
-          <strong>Phone: </strong>
-          <a href="tel:+919820073673">+91 98200 73673</a><br />
-          <strong>Hours:</strong> Daily 8 AM – 11 PM<br />
+        <p class="foot-col-title">Contact</p>
+        <div class="foot-addr">
+          <strong>Amigos Cafe</strong><br/>
+          Shop No. 12, Sunrise Shopping Center<br/>
+          Next to Hyde Park, Thane West<br/>
+          Maharashtra 400610<br/><br/>
+          <strong>Phone: </strong><a href="tel:+919820073673">+91 98200 73673</a><br/>
+          <strong>Hours:</strong> Daily 8 AM – 11 PM<br/>
           <span style="color:var(--gold)">★★★★★ Google Rated</span>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="foot-bottom">
       <span>© 2026 Amigos Cafe · Thane West · All rights reserved</span>
       <span>Made with ☕ warmth &amp; care</span>
     </div>
   </div>
 </footer>
 
-<!-- ══ FLOATING WHATSAPP ══ -->
-<a class="whatsapp-float"
+<!-- ══ FLOATING WHATSAPP — REAL SVG ICON ══ -->
+<a class="wa-float"
    href="https://wa.me/919820073673?text=Hi%20Amigos%20Cafe!%20I%27d%20like%20to%20enquire%20about%20a%20table%20booking."
    target="_blank" rel="noopener"
    aria-label="WhatsApp Amigos Cafe for table booking">
-  <span class="wa-icon">💬</span>
-  <span>Table Booking &amp; Inquiries</span>
+  <!-- Proper WhatsApp SVG — no emoji dependency -->
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span class="wa-label">Table Booking &amp; Inquiries</span>
 </a>
 
 <script src="script.js"></script>
