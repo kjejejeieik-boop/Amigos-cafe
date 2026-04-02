@@ -180,3 +180,4 @@ document.querySelectorAll('img').forEach(img => {
     this.style.opacity = '0';
   });
 });
+
