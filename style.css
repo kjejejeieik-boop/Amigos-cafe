@@ -816,6 +816,32 @@ footer{background:#030200;border-top:1px solid var(--border);padding:72px 24px 3
 @media(max-width:640px){
   .sec{padding:64px 18px}
   .hero-content{padding:110px 18px 80px}
-  .hero-title{font-size:2.9rem}
+  .hero-title{font-size:2.75rem}
+
+  /* Stack hero buttons */
+  .hero-btns{flex-direction:column;align-items:stretch;gap:10px}
+  .hero-btns .btn{justify-content:center;width:100%;padding:15px 20px}
+
+  /* Dish card back — leaner on small screens */
+  .dish-back{padding:20px 16px}
+  .back-name{font-size:1.25rem}
+  .back-price{font-size:1.8rem}
+  .back-desc{display:none}
+  .back-order{padding:9px 18px;font-size:.72rem}
+
+  /* Visit actions — stack full width */
+  .visit-actions{flex-direction:column;align-items:stretch}
+  .visit-actions .btn{justify-content:center;text-align:center}
+
+  /* Map on mobile shorter */
+  .map-embed{height:240px!important}
+  .map-embed iframe{height:240px!important}
+
+  /* WA float = circle */
   .wa-float .wa-label{display:none}
+  .wa-float{padding:15px;border-radius:50%}
+
+  /* Gallery items narrower */
+  .gallery-item{width:170px;height:220px}
 }
+
