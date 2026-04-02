@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Abril+Fatface&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -69,6 +70,7 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="hero">
+  <canvas id="heroCanvas"></canvas>
   <div class="hero-bg"></div>
 
   <!-- Floating food orbs — gradient fallback if image fails -->
@@ -206,252 +208,483 @@
     <!-- STARTERS -->
     <div class="tab-panel on" id="tab-starters">
       <div class="dish-grid">
-
-        <div class="dish rv d1">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80" alt="Loaded Nachos" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div class="veg-flag v"><div class="dot"></div></div>
-              <span class="dish-badge">⭐ Must Try</span>
+        <div class="dish rv d1" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80" alt="Loaded Nachos" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div><span class="dish-badge">⭐ Must Try</span></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Chef's Special</div>
+                <div class="dish-name">Loaded Nachos</div>
+                <div class="dish-desc">Baked with salsa, melted cheese &amp; jalapeños — the table's first instinct.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹349</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Chef's Special</div>
-            <div class="dish-name">Loaded Nachos</div>
-            <div class="dish-desc">Baked with salsa, melted cheese &amp; jalapeños — the table's first instinct, every time.</div>
-            <div class="dish-foot">
-              <span class="dish-price">₹349</span>
-              <button class="add-btn" aria-label="Add Loaded Nachos">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="dish rv d2">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1540189549336-e6e99eb4b895?auto=format&fit=crop&w=600&q=80" alt="Veg Mezze Platter" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div class="veg-flag v"><div class="dot"></div></div>
-            </div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Middle Eastern</div>
-            <div class="dish-name">Veg Mezze Platter</div>
-            <div class="dish-desc">Hummus, warm pita &amp; Middle Eastern sides — a full journey on one plate.</div>
-            <div class="dish-foot">
-              <span class="dish-price">₹350</span>
-              <button class="add-btn" aria-label="Add Veg Mezze Platter">+</button>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Chef's Special</div>
+                <div class="back-name">Loaded Nachos</div>
+                <div class="back-price">₹349</div>
+                <div class="back-desc">Baked with salsa, melted cheese &amp; jalapeños — the table's first instinct.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="dish rv d3">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Chicken Mezze Platter" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div class="veg-flag nv"><div class="dot"></div></div>
+        <div class="dish rv d2" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1540189549336-e6e99eb4b895?auto=format&fit=crop&w=600&q=80" alt="Veg Mezze Platter" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Middle Eastern</div>
+                <div class="dish-name">Veg Mezze Platter</div>
+                <div class="dish-desc">Hummus, warm pita &amp; Middle Eastern sides — a full journey on one plate.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹350</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Middle Eastern</div>
-            <div class="dish-name">Chicken Mezze Platter</div>
-            <div class="dish-desc">The same beloved spread elevated with succulent chicken. A generous, shareable feast.</div>
-            <div class="dish-foot">
-              <span class="dish-price">₹390</span>
-              <button class="add-btn" aria-label="Add Chicken Mezze Platter">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="dish rv d4">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80" alt="Peri Peri Potato Wedges" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div class="veg-flag v"><div class="dot"></div></div>
-            </div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Snack</div>
-            <div class="dish-name">Peri Peri Potato Wedges</div>
-            <div class="dish-desc">Crispy golden wedges with tangy peri peri seasoning. Dangerously addictive.</div>
-            <div class="dish-foot">
-              <span class="dish-price">₹280</span>
-              <button class="add-btn" aria-label="Add Peri Peri Wedges">+</button>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99eb4b895?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Middle Eastern</div>
+                <div class="back-name">Veg Mezze Platter</div>
+                <div class="back-price">₹350</div>
+                <div class="back-desc">Hummus, warm pita &amp; Middle Eastern sides — a full journey on one plate.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="dish rv d5">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80" alt="Mushroom Bruschetta" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div class="veg-flag v"><div class="dot"></div></div>
-              <span class="dish-badge">Fan Fave</span>
+        <div class="dish rv d3" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Chicken Mezze Platter" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Middle Eastern</div>
+                <div class="dish-name">Chicken Mezze Platter</div>
+                <div class="dish-desc">The beloved spread elevated with succulent chicken. A generous, shareable feast.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹390</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Local Favourite</div>
-            <div class="dish-name">Mushroom Bruschetta</div>
-            <div class="dish-desc">Toasted, topped, beloved. A Thane classic that keeps tables coming back for more.</div>
-            <div class="dish-foot">
-              <span class="dish-price">₹320</span>
-              <button class="add-btn" aria-label="Add Mushroom Bruschetta">+</button>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Middle Eastern</div>
+                <div class="back-name">Chicken Mezze Platter</div>
+                <div class="back-price">₹390</div>
+                <div class="back-desc">The beloved spread elevated with succulent chicken. A generous, shareable feast.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
             </div>
           </div>
         </div>
-
+        <div class="dish rv d4" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80" alt="Peri Peri Potato Wedges" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Snack</div>
+                <div class="dish-name">Peri Peri Potato Wedges</div>
+                <div class="dish-desc">Crispy golden wedges with tangy peri peri seasoning. Dangerously addictive.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹280</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Snack</div>
+                <div class="back-name">Peri Peri Potato Wedges</div>
+                <div class="back-price">₹280</div>
+                <div class="back-desc">Crispy golden wedges with tangy peri peri seasoning. Dangerously addictive.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dish rv d5" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80" alt="Mushroom Bruschetta" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div><span class="dish-badge">Fan Fave</span></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Local Favourite</div>
+                <div class="dish-name">Mushroom Bruschetta</div>
+                <div class="dish-desc">Toasted, topped, beloved. A Thane classic that keeps tables coming back.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹320</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Local Favourite</div>
+                <div class="back-name">Mushroom Bruschetta</div>
+                <div class="back-price">₹320</div>
+                <div class="back-desc">Toasted, topped, beloved. A Thane classic that keeps tables coming back.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- MAINS -->
     <div class="tab-panel" id="tab-mains">
       <div class="dish-grid">
-
-        <div class="dish rv d1">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80" alt="Alfredo Pasta Veg" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Italian Classic</div>
-            <div class="dish-name">Alfredo Pasta (Veg)</div>
-            <div class="dish-desc">Rich, velvety cream sauce draped over perfectly cooked pasta. Pure comfort in a bowl.</div>
-            <div class="dish-foot"><span class="dish-price">₹430</span><button class="add-btn">+</button></div>
-          </div>
-        </div>
-
-        <div class="dish rv d2">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=600&q=80" alt="Alfredo Pasta Chicken" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Italian Classic</div>
-            <div class="dish-name">Alfredo Pasta (Chicken)</div>
-            <div class="dish-desc">Creamy Alfredo loaded with tender chicken strips — indulgent and deeply satisfying.</div>
-            <div class="dish-foot"><span class="dish-price">₹490</span><button class="add-btn">+</button></div>
-          </div>
-        </div>
-
-        <div class="dish rv d3">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=600&q=80" alt="Arrabbiata Pasta" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Spicy Italian</div>
-            <div class="dish-name">Arrabbiata Pasta (Veg)</div>
-            <div class="dish-desc">Fiery tomato, garlic, and herbs — a bold pasta that doesn't apologise.</div>
-            <div class="dish-foot"><span class="dish-price">₹430</span><button class="add-btn">+</button></div>
-          </div>
-        </div>
-
-        <div class="dish rv d4">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="BBQ Chicken Pizza" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Wood-Fired</div>
-            <div class="dish-name">Barbecue Chicken Pizza</div>
-            <div class="dish-desc">8-inch thin crust, smoky BBQ sauce and juicy chicken. A reliable, delicious classic.</div>
-            <div class="dish-foot"><span class="dish-price">₹390</span><button class="add-btn">+</button></div>
-          </div>
-        </div>
-
-        <div class="dish rv d5">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80" alt="Mexican Pot Rice" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Mexican</div>
-            <div class="dish-name">Mexican Pot Rice</div>
-            <div class="dish-desc">Fragrant rice with beans, salsa, and south-of-the-border spices. Soul food.</div>
-            <div class="dish-foot"><span class="dish-price">₹390</span><button class="add-btn">+</button></div>
-          </div>
-        </div>
-
-        <div class="dish rv d6">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Chicken Chilaquiles Lasagna" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div class="veg-flag nv"><div class="dot"></div></div>
-              <span class="dish-badge">⭐ Chef's Pick</span>
+        <div class="dish rv d1" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80" alt="Alfredo Pasta (Veg)" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Italian Classic</div>
+                <div class="dish-name">Alfredo Pasta (Veg)</div>
+                <div class="dish-desc">Rich, velvety cream sauce draped over perfectly cooked pasta. Pure comfort.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹430</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Italian Classic</div>
+                <div class="back-name">Alfredo Pasta (Veg)</div>
+                <div class="back-price">₹430</div>
+                <div class="back-desc">Rich, velvety cream sauce draped over perfectly cooked pasta. Pure comfort.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
             </div>
           </div>
-          <div class="dish-body">
-            <div class="dish-tag">Fusion Masterpiece</div>
-            <div class="dish-name">Chicken Chilaquiles Lasagna</div>
-            <div class="dish-desc">Italy meets Mexico — tortillas, tangy salsa, layers of chicken &amp; molten cheese.</div>
-            <div class="dish-foot"><span class="dish-price">₹520</span><button class="add-btn">+</button></div>
+        </div>
+        <div class="dish rv d2" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=600&q=80" alt="Alfredo Pasta (Chicken)" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Italian Classic</div>
+                <div class="dish-name">Alfredo Pasta (Chicken)</div>
+                <div class="dish-desc">Creamy Alfredo loaded with tender chicken strips — indulgent and satisfying.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹490</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Italian Classic</div>
+                <div class="back-name">Alfredo Pasta (Chicken)</div>
+                <div class="back-price">₹490</div>
+                <div class="back-desc">Creamy Alfredo loaded with tender chicken strips — indulgent and satisfying.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
           </div>
         </div>
-
+        <div class="dish rv d3" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=600&q=80" alt="Arrabbiata Pasta (Veg)" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Spicy Italian</div>
+                <div class="dish-name">Arrabbiata Pasta (Veg)</div>
+                <div class="dish-desc">Fiery tomato, garlic, and herbs — a bold pasta that doesn't apologise.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹430</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Spicy Italian</div>
+                <div class="back-name">Arrabbiata Pasta (Veg)</div>
+                <div class="back-price">₹430</div>
+                <div class="back-desc">Fiery tomato, garlic, and herbs — a bold pasta that doesn't apologise.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dish rv d4" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Barbecue Chicken Pizza" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Wood-Fired</div>
+                <div class="dish-name">Barbecue Chicken Pizza</div>
+                <div class="dish-desc">8-inch thin crust, smoky BBQ sauce and juicy chicken. A delicious classic.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹390</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Wood-Fired</div>
+                <div class="back-name">Barbecue Chicken Pizza</div>
+                <div class="back-price">₹390</div>
+                <div class="back-desc">8-inch thin crust, smoky BBQ sauce and juicy chicken. A delicious classic.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dish rv d5" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80" alt="Mexican Pot Rice" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag v"><div class="dot"></div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Mexican</div>
+                <div class="dish-name">Mexican Pot Rice</div>
+                <div class="dish-desc">Fragrant rice with beans, salsa, and south-of-the-border spices. Soul food.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹390</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Mexican</div>
+                <div class="back-name">Mexican Pot Rice</div>
+                <div class="back-price">₹390</div>
+                <div class="back-desc">Fragrant rice with beans, salsa, and south-of-the-border spices. Soul food.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dish rv d6" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Chicken Chilaquiles Lasagna" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div class="veg-flag nv"><div class="dot"></div></div><span class="dish-badge">⭐ Chef's Pick</span></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Fusion Masterpiece</div>
+                <div class="dish-name">Chicken Chilaquiles Lasagna</div>
+                <div class="dish-desc">Italy meets Mexico — tortillas, tangy salsa, layers of chicken &amp; molten cheese.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹520</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Fusion Masterpiece</div>
+                <div class="back-name">Chicken Chilaquiles Lasagna</div>
+                <div class="back-price">₹520</div>
+                <div class="back-desc">Italy meets Mexico — tortillas, tangy salsa, layers of chicken &amp; molten cheese.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- BEVERAGES -->
     <div class="tab-panel" id="tab-beverages">
       <div class="dish-grid">
-
-        <div class="dish rv d1">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Legendary Hot Chocolate" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div></div>
-              <span class="dish-badge">⭐ Iconic</span>
+        <div class="dish rv d1" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="The Legendary Hot Chocolate" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div></div><span class="dish-badge">⭐ Iconic</span></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">The Legend</div>
+                <div class="dish-name">The Legendary Hot Chocolate</div>
+                <div class="dish-desc">"A hug in a mug." Rich, velvety, deeply chocolatey — the drink Amigos is celebrated for.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹250</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">The Legend</div>
+                <div class="back-name">The Legendary Hot Chocolate</div>
+                <div class="back-price">₹250</div>
+                <div class="back-desc">"A hug in a mug." Rich, velvety, deeply chocolatey — the drink Amigos is celebrated for.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
             </div>
           </div>
-          <div class="dish-body">
-            <div class="dish-tag">The Legend</div>
-            <div class="dish-name">The Legendary Hot Chocolate</div>
-            <div class="dish-desc">"A hug in a mug." Rich, velvety, deeply chocolatey — the drink Amigos is celebrated for.</div>
-            <div class="dish-foot"><span class="dish-price">₹250</span><button class="add-btn">+</button></div>
-          </div>
         </div>
-
-        <div class="dish rv d2">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Mud Pie Shake" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top">
-              <div></div>
-              <span class="dish-badge">Fan Fave</span>
+        <div class="dish rv d2" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Mud Pie Shake" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div></div><span class="dish-badge">Fan Fave</span></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Signature Shake</div>
+                <div class="dish-name">Mud Pie Shake</div>
+                <div class="dish-desc">A sinful chocolate and coffee blend that blurs the line between dessert and drink.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹249</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Signature Shake</div>
+                <div class="back-name">Mud Pie Shake</div>
+                <div class="back-price">₹249</div>
+                <div class="back-desc">A sinful chocolate and coffee blend that blurs the line between dessert and drink.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
             </div>
           </div>
-          <div class="dish-body">
-            <div class="dish-tag">Signature Shake</div>
-            <div class="dish-name">Mud Pie Shake</div>
-            <div class="dish-desc">A sinful chocolate and coffee blend that blurs the line between dessert and drink.</div>
-            <div class="dish-foot"><span class="dish-price">₹249</span><button class="add-btn">+</button></div>
+        </div>
+        <div class="dish rv d3" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=600&q=80" alt="Banoofee Shake" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Shake</div>
+                <div class="dish-name">Banoofee Shake</div>
+                <div class="dish-desc">Banana, coffee, and caramel in a glass — tropical comfort with a caffeine kick.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹229</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Shake</div>
+                <div class="back-name">Banoofee Shake</div>
+                <div class="back-price">₹229</div>
+                <div class="back-desc">Banana, coffee, and caramel in a glass — tropical comfort with a caffeine kick.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="dish rv d3">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=600&q=80" alt="Banoofee Shake" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Shake</div>
-            <div class="dish-name">Banoofee Shake</div>
-            <div class="dish-desc">Banana, coffee, and caramel in a glass — tropical comfort with a caffeine kick.</div>
-            <div class="dish-foot"><span class="dish-price">₹229</span><button class="add-btn">+</button></div>
+        <div class="dish rv d4" onclick="flipDish(this)">
+          <div class="dish-inner">
+            <div class="dish-front">
+              <div class="dish-img-wrap">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Kachchi Kairi Delight" loading="lazy" onerror="this.style.opacity='0'"/>
+                <div class="dish-top"><div></div></div>
+              </div>
+              <div class="dish-body">
+                <div class="dish-tag">Local Twist</div>
+                <div class="dish-name">Kachchi Kairi Delight</div>
+                <div class="dish-desc">A refreshing raw mango cooler bringing bold Maharashtra flavours to your table.</div>
+                <div class="dish-foot">
+                  <span class="dish-price">₹230</span>
+                  <span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>flip</span>
+                </div>
+              </div>
+            </div>
+            <div class="dish-back">
+              <div class="dish-back-img"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy" onerror="this.style.opacity='0'"/></div>
+              <div class="dish-back-overlay"></div>
+              <div class="dish-back-content">
+                <div class="back-tag">Local Twist</div>
+                <div class="back-name">Kachchi Kairi Delight</div>
+                <div class="back-price">₹230</div>
+                <div class="back-desc">A refreshing raw mango cooler bringing bold Maharashtra flavours to your table.</div>
+                <a class="back-order" href="https://www.zomato.com/mumbai/cafe-amigos-vasant-vihar-thane-west/order" target="_blank" rel="noopener" onclick="event.stopPropagation()">🍽&ensp;Order on Zomato</a>
+                <button class="back-flip-btn" onclick="event.stopPropagation();flipDish(this.closest('.dish'))">↺ flip back</button>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="dish rv d4">
-          <div class="dish-img-wrap">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Kachchi Kairi Delight" loading="lazy" onerror="this.style.opacity='0'"/>
-            <div class="dish-top"><div></div></div>
-          </div>
-          <div class="dish-body">
-            <div class="dish-tag">Local Twist</div>
-            <div class="dish-name">Kachchi Kairi Delight</div>
-            <div class="dish-desc">A refreshing raw mango cooler bringing bold Maharashtra flavours to your table.</div>
-            <div class="dish-foot"><span class="dish-price">₹230</span><button class="add-btn">+</button></div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
